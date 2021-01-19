@@ -1,9 +1,18 @@
-
+import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
+import Home from './components/Home';
+import Settings from "./components/Settings";
 function App() {
   return (
-    <div className="App">
-      <h1>Settings page</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/user/:idUser">
+          <Settings />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
