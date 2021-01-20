@@ -1,0 +1,15 @@
+.home{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.home>h1{
+    text-align: center;
+    margin: 2rem;
+    border-bottom: solid #16C79A;
+}
+.home__userscontainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
