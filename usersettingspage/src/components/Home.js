@@ -13,7 +13,7 @@ function Home() {
             {error && <div> {error}</div>}
             <div className="home__userscontainer">
                 {customers.map((customer, index) => (
-                    <UserCard key={customer.id} name={customer.data.theme_name} email={customer.data.user_email} imgsrc={customer.data.user_profile_image} />
+                    <UserCard key={customer.id} name={customer.data.theme_name} email={customer.data.user_email} imgsrc={customer.data.user_profile_image} idcustomer={customer.id}/>
                 ))
                 }
             </div>
