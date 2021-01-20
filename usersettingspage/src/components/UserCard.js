@@ -1,11 +1,11 @@
 import React from 'react'
 import '../css/UserCard.css'
 
-function UserCard({name,email}) {
+function UserCard({name,email,imgsrc}) {
     return (
         <div className='usercard'>
             <div className="usercard__header">
-                <img src="https://i.imgur.com/LMhM8nn.jpg" alt="" />
+                <img src={imgsrc} alt="" />
             </div>
             <div className="usercard__body">
                 <h1>{name}</h1>
