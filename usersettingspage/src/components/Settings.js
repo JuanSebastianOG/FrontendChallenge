@@ -26,37 +26,36 @@ function Settings() {
                 </div>
             </div>
             <div className="settings__rightbar">
-                <h1>Edit your settings</h1>
-                <div className="settings__rightbarBannerMessage">
-                    <p><span>Welcome</span> to Mr X's website</p>
-                </div>
+                <label htmlFor='text'>BANNER MESSAGE:</label>
+                <div contenteditable="true" className='settings__rightbarTextarea'><p><span>Welcome</span> to Mr X's website</p></div>
+
                 <div className="settings__rightbarTextInputFields">
 
-                    <label htmlFor="email">EMAIL</label>
+                    <label htmlFor="email">EMAIL:</label>
                     <input type="text" placeholder='dfds@gmail.com' id="lname" name="lname" />
                     <label htmlFor="themename">THEME NAME:</label>
-                    <select placeholder="happy" id="cars">
-                        <option value="volvo">Simply Fabulous</option>
-                        <option value="saab">Simply Fabulous</option>
-                        <option value="opel">Simply Fabulous</option>
-                        <option value="audi">Simply Fabulous</option>
-                    </select>
-                    <label htmlFor="timezone">TIME  ZONE:</label>
-                    <select placeholder="happy" id="cars">
-                        <option value="volvo">America/Bogota</option>
-                        <option value="saab">America/Bogota</option>
-                        <option value="opel">America/Bogota</option>
-                        <option value="audi">America/Bogota</option>
-                    </select>
-                    <label htmlFor="language">LANGUAGE</label>
                     <select id="cars">
-                        <option value="volvo">Chinese </option>
-                        <option value="saab">Chinese </option>
-                        <option value="opel">Chinese </option>
-                        <option value="audi">Chinese </option>
+                        <option value="">Simply Fabulous</option>
+                        <option value="">Simply Fabulous</option>
+                        <option value="">Simply Fabulous</option>
+                        <option value="">Simply Fabulous</option>
+                    </select>
+                    <label htmlFor="timezone">TIME ZONE:</label>
+                    <select placeholder="happy" id="cars">
+                        <option value="">America/Bogota</option>
+                        <option value="">America/Bogota</option>
+                        <option value="">America/Bogota</option>
+                        <option value="">America/Bogota</option>
+                    </select>
+                    <label htmlFor="language">LANGUAGE:</label>
+                    <select>
+                        <option value="">Chinese </option>
+                        <option value="">Chinese </option>
+                        <option value="">Chinese </option>
+                        <option value="">Chinese </option>
                     </select>
                 </div>
-                <label>CHOOSE YOUR ENABLED FEATURES</label>
+                <label>CHOOSE YOUR ENABLED FEATURES:</label>
 
                 <div className="settings__rightbarTextInputFieldsCheck">
                     <div>

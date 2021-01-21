@@ -86,6 +86,21 @@
     justify-content: space-around;
 }
 
+.settings__rightbarTextarea {
+    border: none;
+    outline: none;
+    resize: none;
+    width: 50%;
+    min-width: 270px;
+    max-width: 500px;
+    background-color: #F8F1F1;
+    border: #16C79A dotted 3px;
+    text-align: center;
+    max-height: 5rem;
+    overflow: hidden;
+    font-size: smaller;
+}
+
 .settings__rightbar>h1 {
     text-align: center;
     margin: 2rem;
