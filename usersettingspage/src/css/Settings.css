@@ -1,0 +1,277 @@
+.settings {
+    display: flex;
+}
+
+.settings__leftbar {
+    display: flex;
+    flex: 0.20;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #19456b;
+    border-top-right-radius: 25px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.settings__leftbar>img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.settings__leftbar>h1 {
+    color: #F8F1F1;
+    text-align: center;
+    margin: 2rem;
+    border-bottom: solid #16C79A;
+}
+
+.settings__leftbarMiddle {
+    flex: 0.70;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings__leftbarBottom {
+    background-color: #16C79A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    flex: 0.30;
+}
+
+.settings__leftbarBottom>img {
+    width: 80px;
+    position: relative;
+    bottom: 40px;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin-bottom: 5rem;
+}
+
+.grid__iconDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid__icon {
+    margin: 1rem;
+    height: 30px;
+    align-self: center;
+}
+
+.grid__text {
+    color: white;
+    margin: 1rem;
+    font-size: smaller;
+    text-align: center;
+}
+
+.settings__rightbar {
+    display: flex;
+    flex-direction: column;
+    flex: 0.75;
+    background-color: #F8F1F1;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.settings__rightbarTextarea {
+    border: none;
+    outline: none;
+    resize: none;
+    width: 50%;
+    min-width: 270px;
+    max-width: 500px;
+    background-color: #F8F1F1;
+    border: #16C79A dotted 3px;
+    text-align: center;
+    max-height: 5rem;
+    overflow: hidden;
+    font-size: smaller;
+}
+
+.settings__rightbar>h1 {
+    text-align: center;
+    margin: 2rem;
+    border-bottom: solid #16C79A;
+}
+
+.settings__rightbar>img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.settings__rightbarBannerMessage {
+    color: #19456b;
+}
+
+.settings__rightbarTextInputFields {
+    display: grid;
+    width: 80%;
+    grid-template-columns: 1fr 1fr;
+}
+
+.settings__rightbarTextInputFields>input {
+    padding: 0.5rem;
+    outline: none;
+    border: none;
+    background-color: #F8F1F1;
+    border-bottom: #19456b solid 3px;
+}
+
+.settings__rightbarTextInputFields>select {
+    padding: 0.5rem;
+    outline: none;
+    border: none;
+    background-color: #F8F1F1;
+    border-bottom: #19456b solid 3px;
+}
+
+.settings__rightbarTextInputFields>input::placeholder {
+    color: #707070;
+    font-weight: 700;
+}
+
+.settings__rightbarTextInputFields>label {
+    color: #19456b;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.settings__rightbarTextInputFieldsCheck {
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.settings__rightbar>label {
+    color: #19456b;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.settings__rightbarTextInputFieldsCheck>div {
+    margin: 0.5rem;
+}
+
+.settings__rightbarTextInputFieldsCheck>div>input {
+    margin: 0.5rem;
+}
+
+.settings__rightbar>button {
+    background-color: #16C79A;
+    padding: 1rem;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: 800;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 20%;
+    min-width: 150px;
+}
+
+.settings__rightbar>button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.settings__rightbar>button span:after {
+    content: '✏️';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.settings__rightbar>button:hover span {
+    padding-right: 25px;
+}
+
+.settings__rightbar>button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+    .settings__leftbar {
+        height: unset;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .settings {
+        flex-direction: column;
+    }
+    .settings__leftbar {
+        display: flex;
+        flex: 0.20;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+    .container {
+        margin-bottom: unset;
+    }
+    .settings__leftbarMiddle {
+        flex: unset;
+        display: unset;
+        flex-direction: unset;
+        align-items: unset;
+    }
+    .settings__leftbarBottom {
+        flex: unset;
+        margin-top: 2rem;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+    .settings__leftbarBottom>img {
+        width: 50px;
+        bottom: 25px;
+    }
+    .settings__rightbar>img {
+        margin-top: 2rem;
+        width: 150px;
+        height: 150px;
+        margin-bottom: 2rem;
+    }
+    .settings__rightbarTextInputFields {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .settings__rightbarTextInputFields {
+        grid-template-columns: unset;
+    }
+    .settings__rightbarTextInputFields {
+        margin-top: 2rem;
+    }
+    .grid__text {
+        font-size: smaller;
+    }
+    .settings__rightbar>button {
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+}

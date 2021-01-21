@@ -52,7 +52,7 @@
 
 }
 
-.usercard__body>button{
+.usercard__body>a>button{
    background-color: #16C79A;
    padding: 0.5rem;
    outline: none;
@@ -63,14 +63,14 @@
    cursor: pointer;
 }
 
-.usercard__body>button span {
+.usercard__body>a>button span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
  }
   
-  .usercard__body>button span:after {
+  .usercard__body a>button span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -79,11 +79,11 @@
     transition: 0.5s;
   }
   
-  .usercard__body>button:hover span {
+  .usercard__body>a>button:hover span {
     padding-right: 15px;
   }
   
-  .usercard__body>button:hover span:after {
+  .usercard__body>a>button:hover span:after {
     opacity: 1;
     right: 0;
   }
