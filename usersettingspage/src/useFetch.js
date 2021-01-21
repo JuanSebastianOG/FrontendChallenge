@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (url)=>{
-    const [data, setData] = useState([])
+const useFetch = (url) => {
+    const [data, setData] = useState(null)
     const [error, seterror] = useState(null)
 
     useEffect(() => {
@@ -13,13 +13,13 @@ const useFetch = (url)=>{
                 return res.json();
             })
             .then(data => {
-                setData(data.results);
+                setData(data);
             })
             .catch(e => {
                 seterror(e.message)
             })
     }, [url])
-    return{data,error}
+    return { data, error }
 }
 
 export default useFetch;
