@@ -130,6 +130,10 @@
     background-color: #F8F1F1;
     border-bottom: #19456b solid 3px;
 }
+.settings__rightbarTextInputFields>label>span {
+    color: black;
+    font-weight: 100;
+}
 
 .settings__rightbarTextInputFields>select {
     outline: none;
@@ -138,10 +142,6 @@
     border-bottom: #19456b solid 3px;
 }
 
-.settings__rightbarTextInputFields>input::placeholder {
-    color: #707070;
-    font-weight: 700;
-}
 
 .settings__rightbarTextInputFields>label {
     color: #19456b;
