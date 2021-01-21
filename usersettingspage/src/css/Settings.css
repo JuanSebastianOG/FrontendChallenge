@@ -132,7 +132,6 @@
 }
 
 .settings__rightbarTextInputFields>select {
-    padding: 0.5rem;
     outline: none;
     border: none;
     background-color: #F8F1F1;
@@ -147,8 +146,8 @@
 .settings__rightbarTextInputFields>label {
     color: #19456b;
     font-weight: 700;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .settings__rightbarTextInputFieldsCheck {
