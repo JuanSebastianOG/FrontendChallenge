@@ -70,7 +70,9 @@ function Settings() {
     const [timeError, setTimeError] = useState('');
     const handleTimeChange = (event) => {
         if (event.target.value.length > 0) {
-            const found = timezones.find(element => element.localeCompare(event.target.value) === 0);
+            var found;
+            if(timezones)
+                  found = timezones.find(element => element.localeCompare(event.target.value) === 0);
             if (found) {
                 setTimeError(false)
             }
@@ -168,7 +170,7 @@ function Settings() {
     }, [customerData])
 
     //If the data is loaded
-    if (customerData) {
+    if (customerData&&timezones) {
         return (
             <div className='settings'>
 

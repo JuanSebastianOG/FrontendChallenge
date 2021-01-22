@@ -95,14 +95,14 @@
     outline: none;
     resize: none;
     width: 50%;
+    padding: 1rem;
     min-width: 270px;
     max-width: 500px;
     background-color: #F8F1F1;
     border: #16C79A dotted 3px;
     text-align: center;
-    max-height: 5rem;
+    max-height: 3rem;
     overflow: hidden;
-    font-size: smaller;
 }
 
 .settings__rightbar>h1 {
@@ -139,17 +139,19 @@
     background-color: chartreuse;
 }
 .settings__rightbarTextInputFields>input {
-    padding: 0.3rem;
+    padding: 0.5rem;
     outline: none;
     border: none;
     background-color: #F8F1F1;
     border-bottom: #19456b solid 3px;
     color: #707070;
+    font-size: small;
 }
 .settings__rightbarTextInputFields>label>span {
     color: black;
     font-weight: 100;
     margin-left: 0.3rem;
+    font-size: medium;
 }
 
 .settings__rightbarTextInputFields>select {
@@ -157,8 +159,9 @@
     border: none;
     background-color: #F8F1F1;
     border-bottom: #19456b solid 3px;
-    font-size: smaller;
+    font-size: small;
     color: #707070;
+    padding: 0.3rem;
 }
 
 
@@ -167,11 +170,12 @@
     font-weight: 700;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    font-size: medium;
+
 }
 
 .settings__rightbarTextInputFieldsCheck {
     display: flex;
-    width: 80%;
     justify-content: space-around;
     flex-wrap: wrap;
 }
