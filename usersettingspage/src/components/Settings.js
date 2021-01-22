@@ -1,21 +1,99 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../css/Settings.css'
 import { useHistory } from "react-router-dom";
 import useFetch from '../useFetch';
 import LeftInfo from './LeftInfo';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+    },
+    formControl: {
+        margin: theme.spacing(1),
+    },
+}));
+
+const StyledCheckbox = withStyles({
+    root: {
+        color: "#11698E",
+        '&$checked': {
+            color: "#11698E",
+            fontStyle: 'bold',
+
+        },
+    },
+    checked: {},
+})((props) => <Checkbox color="default" {...props} />);
 
 function Settings() {
+    const classes = useStyles();
+    //State values for enabled features
+    const [state, setState] = useState({
+        ceinge: false,
+        inbata: false,
+        encose: false,
+        encodi: false,
+        endase: false,
+        ened: false
+    });
+    const [ceinge, setceinge] = useState(false)
+    const [inbata, setinbata] = useState(false)
+    const [encose, setencose] = useState(false)
+    const [encodi, setencodi] = useState(false)
+    const [endase, setendase] = useState(false)
+    const [ened, setened] = useState(false)
+    const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+        switch (event.target.name) {
+            case 'ceinge':
+                setceinge(event.target.checked)
+                break;
+            case 'inbata':
+                setinbata(event.target.checked)
+                break;
+            case 'encose':
+                setencose(event.target.checked)
+                break;
+            case 'encodi':
+                setencodi(event.target.checked)
+                break;
+            case 'endase':
+                setendase(event.target.checked)
+                break;
+            case 'ened':
+                setened(event.target.checked)
+                break;
+            default:
+                break;
+        }
+    };
+    //History for extract the link and make the fetch
     const history = useHistory();
+    const link = '/api/v1' + history.location.pathname;
+    const { data: customerData, error } = useFetch(link)
+
+    //Fetch time zones for the search select 
+    const { data: timezones } = useFetch('http://worldtimeapi.org/api/timezone')
+
+
+    //Themes for select if customer wants to edit
     const themes = ['Simply Fabulous', 'Tropical Island', 'Safari', 'Tranquility', 'Mustache Bash', 'Candy Crush', 'Garden Party']
+
+
+    //Languages for select if customer wants to edit
     const languagesarr = ["Chinese", "Italian", "English", "Spanish", "French", "German"]
 
 
-    const themesSelect = themes.map(Add => Add)
-    const link = '/api/v1' + history.location.pathname;
-    const { data: customerData, error } = useFetch(link)
-    const { data: timezones } = useFetch('http://worldtimeapi.org/api/timezone')
+    const errors = [ceinge, inbata, encose, encodi, endase, ened].filter((v) => v).length !== 2; // Make an error depending on subscription
 
-    
+
+    //Sictionary for store only the code
     var languages = {
         zh: "Chinese",
         it: "Italian",
@@ -24,8 +102,23 @@ function Settings() {
         fr: "French",
         de: "German",
     };
+    useEffect(() => {
+        if (customerData) {
+            const { ENABLED_FEATURES } = customerData.data
+            const { CERTIFICATES_INSTRUCTOR_GENERATION, ENABLE_COURSEWARE_SEARCH,
+                ENABLE_COURSE_DISCOVERY, ENABLE_DASHBOARD_SEARCH,
+                ENABLE_EDXNOTES, INSTRUCTOR_BACKGROUND_TASKS } = ENABLED_FEATURES
 
-    console.log(customerData)
+            setceinge(CERTIFICATES_INSTRUCTOR_GENERATION)
+            setinbata(INSTRUCTOR_BACKGROUND_TASKS)
+            setencose(ENABLE_COURSEWARE_SEARCH)
+            setencodi(ENABLE_COURSE_DISCOVERY)
+            setendase(ENABLE_DASHBOARD_SEARCH)
+            setened(ENABLE_EDXNOTES)
+
+            console.log(customerData)
+        }
+    }, [customerData])
 
     if (customerData) {
         return (
@@ -54,7 +147,7 @@ function Settings() {
                         <select id="themename">
                             <option defaultValue="selected">Change theme</option>
                             {
-                                themesSelect.map((module, key) => <option value={key} key={module}>{module}</option>)
+                                themes.map((module, key) => <option value={key} key={module}>{module}</option>)
                             }
                         </select>
                         <label htmlFor="timezone">TIME ZONE: <span>{customerData.data.displayed_timezone}</span> </label>
@@ -76,30 +169,40 @@ function Settings() {
                     <label>CHOOSE YOUR ENABLED FEATURES:</label>
 
                     <div className="settings__rightbarTextInputFieldsCheck">
-                        <div>
-                            <input type="checkbox" id="horns" name="horns" />
-                            <label htmlFor="cinge">Certificates instructor generation</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="horns" name="horns" />
-                            <label htmlFor="inbsts">Instructor background tasks</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="horns" name="horns" />
-                            <label htmlFor="encose">Enable courseware search</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="horns" name="horns" />
-                            <label htmlFor="encodi">Enable courseware discovery</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="horns" name="horns" />
-                            <label htmlFor="endase">Enable dashboard search</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="horns" name="horns" />
-                            <label htmlFor="horns">Enable edxnotes</label>
-                        </div>
+                        <FormControl component="fieldset" className={classes.formControl}>
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={<StyledCheckbox checked={ceinge} onChange={handleChange} name="ceinge" />}
+                                    label="Certificates instructor generation"
+                                    color=''
+                                />
+                                <FormControlLabel
+                                    control={<StyledCheckbox checked={inbata} onChange={handleChange} name="inbata" />}
+                                    label="Instructor background tasks"
+                                />
+                                <FormControlLabel
+                                    control={<StyledCheckbox checked={encodi} onChange={handleChange} name="encodi" />}
+                                    label="Enable courseware discovery"
+                                />
+                            </FormGroup>
+                        </FormControl>
+                        <FormControl component="fieldset" className={classes.formControl}>
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={<StyledCheckbox checked={endase} onChange={handleChange} name="endase" />}
+                                    label="Enable dashboard search"
+                                />
+                                <FormControlLabel
+                                    control={<StyledCheckbox checked={ened} onChange={handleChange} name="ened" />}
+                                    label="Enable edxnotes"
+                                />
+                                <FormControlLabel
+                                    control={<StyledCheckbox checked={encose} onChange={handleChange} name="encose" />}
+                                    label="Enable courseware search"
+                                />
+                            </FormGroup>
+                        </FormControl>
+
                     </div>
 
                     <button><span>EDIT</span></button>
@@ -119,5 +222,6 @@ function Settings() {
         )
     }
 }
+
 
 export default Settings

@@ -1,10 +1,13 @@
 .settings {
     display: flex;
 }
-
+.MuiTypography-body1 {
+    font-family: 'Montserrat',"Roboto", "Helvetica", "Arial", sans-serif !important;
+    margin: 0.5rem!important;
+}
 .settings__leftbar {
     display: flex;
-    flex: 0.20;
+    flex: 0.30;
     flex-direction: column;
     height: 100vh;
     background-color: #19456b;
@@ -14,8 +17,9 @@
 }
 
 .settings__leftbar>img {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
+    margin: 0.5rem;
     border-radius: 50%;
 }
 
@@ -219,7 +223,7 @@
     right: 0;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1120px) {
     .settings__leftbar {
         height: unset;
     }
