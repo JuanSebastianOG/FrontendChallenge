@@ -123,16 +123,22 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.settings__rightbarTextInputFields>datalist {
+    color: blue;
+    background-color: chartreuse;
+}
 .settings__rightbarTextInputFields>input {
-    padding: 0.5rem;
+    padding: 0.3rem;
     outline: none;
     border: none;
     background-color: #F8F1F1;
     border-bottom: #19456b solid 3px;
+    color: #707070;
 }
 .settings__rightbarTextInputFields>label>span {
     color: black;
     font-weight: 100;
+    margin-left: 0.3rem;
 }
 
 .settings__rightbarTextInputFields>select {
@@ -140,6 +146,8 @@
     border: none;
     background-color: #F8F1F1;
     border-bottom: #19456b solid 3px;
+    font-size: smaller;
+    color: #707070;
 }
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import '../css/Settings.css'
 import { useHistory } from "react-router-dom";
 import useFetch from '../useFetch';
@@ -7,10 +7,14 @@ import LeftInfo from './LeftInfo';
 function Settings() {
     const history = useHistory();
     const themes = ['Simply Fabulous', 'Tropical Island', 'Safari', 'Tranquility', 'Mustache Bash', 'Candy Crush', 'Garden Party']
+    const languagesarr = ["Chinese", "Italian", "English", "Spanish", "French", "German"]
+
 
     const themesSelect = themes.map(Add => Add)
     const link = '/api/v1' + history.location.pathname;
     const { data: customerData, error } = useFetch(link)
+    const { data: timezones } = useFetch('http://worldtimeapi.org/api/timezone')
+
     
     var languages = {
         zh: "Chinese",
@@ -20,6 +24,7 @@ function Settings() {
         fr: "French",
         de: "German",
     };
+
     console.log(customerData)
 
     if (customerData) {
@@ -55,15 +60,17 @@ function Settings() {
                         <label htmlFor="timezone">TIME ZONE: <span>{customerData.data.displayed_timezone}</span> </label>
                         <input list="brow" />
                         <datalist id="brow">
-                            <option defaultValue="Internet Explorer" />
-                            <option defaultValue="Firefox" />
-                            <option defaultValue="Chrome" />
-                            <option defaultValue="Opera" />
-                            <option defaultValue="Safari" />
+                            {
+                                timezones && timezones.map((time) => <option key={time}>{time}</option>)
+                            }
                         </datalist>
-                        <label htmlFor="language">LANGUAGE: <span>{languages[customerData.data.language_code]}</span> </label>
-                        <select>
 
+                        <label htmlFor="language">LANGUAGE: <span>{languages[customerData.data.language_code]}</span> </label>
+                        <select id="themename">
+                            <option defaultValue="selected">Change language</option>
+                            {
+                                languagesarr.map((theme, key) => <option value={key} key={theme}>{theme}</option>)
+                            }
                         </select>
                     </div>
                     <label>CHOOSE YOUR ENABLED FEATURES:</label>
