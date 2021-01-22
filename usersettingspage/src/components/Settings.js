@@ -9,7 +9,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 
-
+//Styles for formControl of Material UI
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
     },
 }));
-
+//Styles for Checkbox of Material UI
 const StyledCheckbox = withStyles({
     root: {
         color: "#11698E",
@@ -31,12 +31,13 @@ const StyledCheckbox = withStyles({
     checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
+/* eslint-disable */
 function Settings() {
     const classes = useStyles();
     //Cant features enabled
     const [numfeatures, setnumfeatures] = useState(0)
     //State for buttton submit
-    const [allowed, setallowed] = useState(true)
+    const [allowed, setallowed] = useState(false)
 
     //State values for enabled features
     const [ceinge, setceinge] = useState(false)
@@ -51,9 +52,7 @@ function Settings() {
     const [email, setemail] = useState('')
     const [emailError, setEmailError] = useState('');
     const handleEmailChange = (event) => {
-        console.log(event.target.value.length)
-        const validEmailRegex =
-            RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+        var validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
         if (event.target.value.length > 0) {
             validEmailRegex.test(event.target.value) ? setallowed(false) : setallowed(true)
             setEmailError(validEmailRegex.test(event.target.value) ? '' : 'Ivalid email')
@@ -66,9 +65,31 @@ function Settings() {
         setemail(event.target.value)
 
     };
+    //State value time validation
+    const [time, setTime] = useState('')
+    const [timeError, setTimeError] = useState('');
+    const handleTimeChange = (event) => {
+        if (event.target.value.length > 0) {
+            const found = timezones.find(element => element.localeCompare(event.target.value) === 0);
+            if (found) {
+                setTimeError(false)
+            }
+            else {
+                setallowed(true)
+                setTimeError('Invalid timezone')
+            }
 
+        } else {
+            setTimeError('')
+            setallowed(false)
+        }
+        setTime(event.target.value)
+    };
+
+    //Max number of features validation
     const errors = [ceinge, inbata, encose, encodi, endase, ened].filter((v) => v).length > numfeatures
 
+    //Changes on checkboxes
     const handleChange = (event) => {
         switch (event.target.name) {
             case 'ceinge':
@@ -122,6 +143,7 @@ function Settings() {
         fr: "French",
         de: "German",
     };
+    //Get and set the data related to features checkboxes
     useEffect(() => {
         var features = {
             "free": 1,
@@ -142,10 +164,10 @@ function Settings() {
             setened(ENABLE_EDXNOTES)
 
             setnumfeatures(features[SUBSCRIPTION])
-            console.log(customerData, SUBSCRIPTION)
         }
     }, [customerData])
 
+    //If the data is loaded
     if (customerData) {
         return (
             <div className='settings'>
@@ -177,7 +199,7 @@ function Settings() {
                             }
                         </select>
                         <label htmlFor="timezone">TIME ZONE: <span>{customerData.data.displayed_timezone}</span> </label>
-                        <input list="brow" />
+                        <input list="brow" onChange={handleTimeChange} />
                         <datalist id="brow">
                             {
                                 timezones && timezones.map((time) => <option key={time}>{time}</option>)
@@ -194,6 +216,8 @@ function Settings() {
                     </div>
                     {emailError.length > 0 &&
                         <span className='alert'><span>&#9888; </span>{emailError}</span>}
+                    {timeError.length > 0 &&
+                        <span className='alert'><span>&#9888; </span>{timeError}</span>}
                     <label>CHOOSE YOUR ENABLED FEATURES:</label>
                     {errors && <h5 className="alert"><span>&#9888; </span>Too many features. Max: {numfeatures}</h5>}
 
@@ -233,7 +257,7 @@ function Settings() {
                         </FormControl>
                     </div>
 
-                    <button disabled={errors || allowed}><span>EDIT</span></button>
+                    <button disabled={errors || allowed || timeError}><span>EDIT</span></button>
 
                 </div>
 
@@ -242,9 +266,7 @@ function Settings() {
     } else {
         return (
             <div className="check">
-
                 {error ? <div> {error}</div> : <div>Loading..</div>}
-
             </div>
 
         )
