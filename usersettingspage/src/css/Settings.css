@@ -1,10 +1,13 @@
 .settings {
     display: flex;
 }
-
+.MuiTypography-body1 {
+    font-family: 'Montserrat',"Roboto", "Helvetica", "Arial", sans-serif !important;
+    margin: 0.5rem!important;
+}
 .settings__leftbar {
     display: flex;
-    flex: 0.20;
+    flex: 0.30;
     flex-direction: column;
     height: 100vh;
     background-color: #19456b;
@@ -14,8 +17,9 @@
 }
 
 .settings__leftbar>img {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
+    margin: 0.5rem;
     border-radius: 50%;
 }
 
@@ -91,14 +95,14 @@
     outline: none;
     resize: none;
     width: 50%;
+    padding: 1rem;
     min-width: 270px;
     max-width: 500px;
     background-color: #F8F1F1;
     border: #16C79A dotted 3px;
     text-align: center;
-    max-height: 5rem;
+    max-height: 3rem;
     overflow: hidden;
-    font-size: smaller;
 }
 
 .settings__rightbar>h1 {
@@ -122,38 +126,56 @@
     width: 80%;
     grid-template-columns: 1fr 1fr;
 }
+.alert{
+    color: red;
+    font-weight: 100;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: smaller;
+    margin: 0.5rem;
+}
 
+.settings__rightbarTextInputFields>datalist {
+    color: blue;
+    background-color: chartreuse;
+}
 .settings__rightbarTextInputFields>input {
     padding: 0.5rem;
     outline: none;
     border: none;
     background-color: #F8F1F1;
     border-bottom: #19456b solid 3px;
+    color: #707070;
+    font-size: small;
+}
+.settings__rightbarTextInputFields>label>span {
+    color: black;
+    font-weight: 100;
+    margin-left: 0.3rem;
+    font-size: medium;
 }
 
 .settings__rightbarTextInputFields>select {
-    padding: 0.5rem;
     outline: none;
     border: none;
     background-color: #F8F1F1;
     border-bottom: #19456b solid 3px;
+    font-size: small;
+    color: #707070;
+    padding: 0.3rem;
 }
 
-.settings__rightbarTextInputFields>input::placeholder {
-    color: #707070;
-    font-weight: 700;
-}
 
 .settings__rightbarTextInputFields>label {
     color: #19456b;
     font-weight: 700;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: medium;
+
 }
 
 .settings__rightbarTextInputFieldsCheck {
     display: flex;
-    width: 80%;
     justify-content: space-around;
     flex-wrap: wrap;
 }
@@ -186,6 +208,12 @@
     width: 20%;
     min-width: 150px;
 }
+.settings__rightbar>button:disabled {
+    background: #999;
+    color: #555;
+    cursor: not-allowed;
+    padding: 0.8rem 1.2rem;
+}
 
 .settings__rightbar>button span {
     cursor: pointer;
@@ -212,7 +240,7 @@
     right: 0;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1120px) {
     .settings__leftbar {
         height: unset;
     }
