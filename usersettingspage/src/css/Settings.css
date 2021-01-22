@@ -126,6 +126,13 @@
     width: 80%;
     grid-template-columns: 1fr 1fr;
 }
+.alert{
+    color: red;
+    font-weight: 100;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: smaller;
+    margin: 0.5rem;
+}
 
 .settings__rightbarTextInputFields>datalist {
     color: blue;
@@ -196,6 +203,12 @@
     cursor: pointer;
     width: 20%;
     min-width: 150px;
+}
+.settings__rightbar>button:disabled {
+    background: #999;
+    color: #555;
+    cursor: not-allowed;
+    padding: 0.8rem 1.2rem;
 }
 
 .settings__rightbar>button span {

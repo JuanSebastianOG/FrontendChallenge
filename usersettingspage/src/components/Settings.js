@@ -33,23 +33,43 @@ const StyledCheckbox = withStyles({
 
 function Settings() {
     const classes = useStyles();
+    //Cant features enabled
+    const [numfeatures, setnumfeatures] = useState(0)
+    //State for buttton submit
+    const [allowed, setallowed] = useState(true)
+
     //State values for enabled features
-    const [state, setState] = useState({
-        ceinge: false,
-        inbata: false,
-        encose: false,
-        encodi: false,
-        endase: false,
-        ened: false
-    });
     const [ceinge, setceinge] = useState(false)
     const [inbata, setinbata] = useState(false)
     const [encose, setencose] = useState(false)
     const [encodi, setencodi] = useState(false)
     const [endase, setendase] = useState(false)
     const [ened, setened] = useState(false)
+
+
+    //State value email validation
+    const [email, setemail] = useState('')
+    const [emailError, setEmailError] = useState('');
+    const handleEmailChange = (event) => {
+        console.log(event.target.value.length)
+        const validEmailRegex =
+            RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+        if (event.target.value.length > 0) {
+            validEmailRegex.test(event.target.value) ? setallowed(false) : setallowed(true)
+            setEmailError(validEmailRegex.test(event.target.value) ? '' : 'Ivalid email')
+
+        } else {
+            setEmailError('')
+            setallowed(false)
+        }
+
+        setemail(event.target.value)
+
+    };
+
+    const errors = [ceinge, inbata, encose, encodi, endase, ened].filter((v) => v).length > numfeatures
+
     const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
         switch (event.target.name) {
             case 'ceinge':
                 setceinge(event.target.checked)
@@ -70,6 +90,7 @@ function Settings() {
                 setened(event.target.checked)
                 break;
             default:
+
                 break;
         }
     };
@@ -90,7 +111,6 @@ function Settings() {
     const languagesarr = ["Chinese", "Italian", "English", "Spanish", "French", "German"]
 
 
-    const errors = [ceinge, inbata, encose, encodi, endase, ened].filter((v) => v).length !== 2; // Make an error depending on subscription
 
 
     //Sictionary for store only the code
@@ -103,11 +123,16 @@ function Settings() {
         de: "German",
     };
     useEffect(() => {
+        var features = {
+            "free": 1,
+            "basic": 3,
+            "premium": 6,
+        };
         if (customerData) {
-            const { ENABLED_FEATURES } = customerData.data
+            const { ENABLED_FEATURES, SUBSCRIPTION } = customerData.data;
             const { CERTIFICATES_INSTRUCTOR_GENERATION, ENABLE_COURSEWARE_SEARCH,
                 ENABLE_COURSE_DISCOVERY, ENABLE_DASHBOARD_SEARCH,
-                ENABLE_EDXNOTES, INSTRUCTOR_BACKGROUND_TASKS } = ENABLED_FEATURES
+                ENABLE_EDXNOTES, INSTRUCTOR_BACKGROUND_TASKS } = ENABLED_FEATURES;
 
             setceinge(CERTIFICATES_INSTRUCTOR_GENERATION)
             setinbata(INSTRUCTOR_BACKGROUND_TASKS)
@@ -116,7 +141,8 @@ function Settings() {
             setendase(ENABLE_DASHBOARD_SEARCH)
             setened(ENABLE_EDXNOTES)
 
-            console.log(customerData)
+            setnumfeatures(features[SUBSCRIPTION])
+            console.log(customerData, SUBSCRIPTION)
         }
     }, [customerData])
 
@@ -142,7 +168,7 @@ function Settings() {
                     <div className="settings__rightbarTextInputFields">
 
                         <label htmlFor="email">EMAIL: <span>{customerData.data.user_email}</span></label>
-                        <input type="email" placeholder="Change email" id="lname" name="lname" />
+                        <input type="email" onChange={handleEmailChange} placeholder="Change email" id="lname" name="lname" />
                         <label htmlFor="themename">THEME NAME:  <span>{customerData.data.theme_name}</span></label>
                         <select id="themename">
                             <option defaultValue="selected">Change theme</option>
@@ -166,7 +192,10 @@ function Settings() {
                             }
                         </select>
                     </div>
+                    {emailError.length > 0 &&
+                        <span className='alert'><span>&#9888; </span>{emailError}</span>}
                     <label>CHOOSE YOUR ENABLED FEATURES:</label>
+                    {errors && <h5 className="alert"><span>&#9888; </span>Too many features. Max: {numfeatures}</h5>}
 
                     <div className="settings__rightbarTextInputFieldsCheck">
                         <FormControl component="fieldset" className={classes.formControl}>
@@ -202,10 +231,9 @@ function Settings() {
                                 />
                             </FormGroup>
                         </FormControl>
-
                     </div>
 
-                    <button><span>EDIT</span></button>
+                    <button disabled={errors || allowed}><span>EDIT</span></button>
 
                 </div>
 
