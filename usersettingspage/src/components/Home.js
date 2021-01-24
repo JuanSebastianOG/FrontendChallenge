@@ -9,7 +9,7 @@ function Home() {
 
 
     return (
-        <div className='home'>
+        <div className='home' data-testid="home-page">
             <h1>Our Customers</h1>
             {error && <div> {error}</div>}
             <div className="home__userscontainer">

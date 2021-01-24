@@ -227,7 +227,7 @@ function Settings() {
     //If the data is loaded
     if (customerData && timezones) {
         return (
-            <div className='settings'>
+            <div className='settings' data-testid="settings">
                  <Link to={{ pathname: '/' }}>
                 <button className="settings__backbtn">
                     <span>BACK</span> 

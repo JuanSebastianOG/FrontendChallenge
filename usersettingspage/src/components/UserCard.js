@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function UserCard({ name, email, imgsrc, idcustomer }) {
     return (
-        <div className='usercard' >
+        <div className='usercard' data-testid="usercard" >
             <div className="usercard__header">
                 <img src={imgsrc} alt="" />
             </div>
