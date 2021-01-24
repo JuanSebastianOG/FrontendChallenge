@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../css/Settings.css'
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import useFetch from '../useFetch';
 import LeftInfo from './LeftInfo';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -228,7 +228,11 @@ function Settings() {
     if (customerData && timezones) {
         return (
             <div className='settings'>
-
+                 <Link to={{ pathname: '/' }}>
+                <button className="settings__backbtn">
+                    <span>BACK</span> 
+                </button>
+                </Link>
                 <div className="settings__leftbar">
                     <h1 >SETTINGS</h1>
                     <img src={customerData.data.user_profile_image} alt="" />
