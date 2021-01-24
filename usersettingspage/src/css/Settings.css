@@ -176,6 +176,7 @@
 
 .settings__rightbarTextInputFieldsCheck {
     display: flex;
+    width: 80%;
     justify-content: space-around;
     flex-wrap: wrap;
 }

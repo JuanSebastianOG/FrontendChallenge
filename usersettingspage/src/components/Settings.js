@@ -63,24 +63,23 @@ function Settings() {
         }
 
         setemail(event.target.value)
-
     };
     //State value time validation
     const [time, setTime] = useState('')
     const [timeError, setTimeError] = useState('');
     const handleTimeChange = (event) => {
         if (event.target.value.length > 0) {
-            var found;
-            if(timezones)
-                  found = timezones.find(element => element.localeCompare(event.target.value) === 0);
-            if (found) {
-                setTimeError(false)
+            if (timezones) {
+                var found = timezones.find(element => element.localeCompare(event.target.value) === 0);
+                if (found) {
+                    setTimeError(false)
+                    setallowed(false)
+                }
+                else {
+                    setallowed(true)
+                    setTimeError('Invalid timezone')
+                }
             }
-            else {
-                setallowed(true)
-                setTimeError('Invalid timezone')
-            }
-
         } else {
             setTimeError('')
             setallowed(false)
@@ -128,23 +127,79 @@ function Settings() {
 
     //Themes for select if customer wants to edit
     const themes = ['Simply Fabulous', 'Tropical Island', 'Safari', 'Tranquility', 'Mustache Bash', 'Candy Crush', 'Garden Party']
-
+    const [theme, settheme] = useState('')
+    const handleThemeChange = (event) => {
+        settheme(themes[event.target.value])
+    };
+    function getKeyByValue(object, value) {
+        return Object.keys(object).find(key => object[key] === value);
+    }
 
     //Languages for select if customer wants to edit
     const languagesarr = ["Chinese", "Italian", "English", "Spanish", "French", "German"]
-
-
-
-
-    //Sictionary for store only the code
+    const [language, setlanguage] = useState('')
+    const handleLanguageChange = (event) => {
+        setlanguage(getKeyByValue(languages, languagesarr[event.target.value]))
+    };
+    //Dictionary for store only the code
     var languages = {
         zh: "Chinese",
         it: "Italian",
         en: "English",
         sp: "Spanish",
         fr: "French",
-        de: "German",
+        de: "German"
     };
+
+    const handleUpdateClick = (event) => {
+        console.log(email, theme, time, language, ceinge, endase, inbata, ened, encodi, encose)
+        var banner = document.getElementById('textarea').innerHTML;
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(
+                {
+                    data: {
+                        SUBSCRIPTION: customerData.data.SUBSCRIPTION,
+                        CREATION_DATE: customerData.data.CREATION_DATE,
+                        LAST_PAYMENT_DATE: customerData.data.LAST_PAYMENT_DATE,
+                        theme_name: theme ? theme : customerData.data.theme_name,
+                        ENABLED_FEATURES: {
+                            CERTIFICATES_INSTRUCTOR_GENERATION: ceinge,
+                            INSTRUCTOR_BACKGROUND_TASKS: inbata,
+                            ENABLE_COURSEWARE_SEARCH: encose,
+                            ENABLE_COURSE_DISCOVERY: encodi,
+                            ENABLE_DASHBOARD_SEARCH: endase,
+                            ENABLE_EDXNOTES: ened,
+                        },
+                        language_code: language ? language : customerData.data.language_code,
+                        banner_message: banner,
+                        displayed_timezone: time ? time : customerData.data.displayed_timezone,
+                        user_profile_image: customerData.data.user_profile_image,
+                        user_email: email ? email : customerData.data.user_email,
+                    }
+                }
+            )
+        };
+        console.log(requestOptions.body)
+        fetch(link + '/', requestOptions)
+            .then(async response => {
+                const data = await response.json();
+
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    };
+
+
     //Get and set the data related to features checkboxes
     useEffect(() => {
         var features = {
@@ -170,7 +225,7 @@ function Settings() {
     }, [customerData])
 
     //If the data is loaded
-    if (customerData&&timezones) {
+    if (customerData && timezones) {
         return (
             <div className='settings'>
 
@@ -186,20 +241,14 @@ function Settings() {
                 </div>
                 <div className="settings__rightbar">
                     <label htmlFor='text'>BANNER MESSAGE:</label>
-                    <div dangerouslySetInnerHTML={{ __html: customerData.data.banner_message }} contentEditable="true" suppressContentEditableWarning={true} className='settings__rightbarTextarea'>
+                    <div dangerouslySetInnerHTML={{ __html: customerData.data.banner_message }} contentEditable="true" id='textarea' suppressContentEditableWarning={true} className='settings__rightbarTextarea'>
                     </div>
 
                     <div className="settings__rightbarTextInputFields">
 
                         <label htmlFor="email">EMAIL: <span>{customerData.data.user_email}</span></label>
                         <input type="email" onChange={handleEmailChange} placeholder="Change email" id="lname" name="lname" />
-                        <label htmlFor="themename">THEME NAME:  <span>{customerData.data.theme_name}</span></label>
-                        <select id="themename">
-                            <option defaultValue="selected">Change theme</option>
-                            {
-                                themes.map((module, key) => <option value={key} key={module}>{module}</option>)
-                            }
-                        </select>
+
                         <label htmlFor="timezone">TIME ZONE: <span>{customerData.data.displayed_timezone}</span> </label>
                         <input list="brow" onChange={handleTimeChange} />
                         <datalist id="brow">
@@ -209,10 +258,17 @@ function Settings() {
                         </datalist>
 
                         <label htmlFor="language">LANGUAGE: <span>{languages[customerData.data.language_code]}</span> </label>
-                        <select id="themename">
+                        <select onChange={handleLanguageChange} id="themename">
                             <option defaultValue="selected">Change language</option>
                             {
-                                languagesarr.map((theme, key) => <option value={key} key={theme}>{theme}</option>)
+                                languagesarr.map((language, key) => <option value={key} key={language}>{language}</option>)
+                            }
+                        </select>
+                        <label htmlFor="themename">THEME NAME:  <span>{customerData.data.theme_name}</span></label>
+                        <select onChange={handleThemeChange} id="themename">
+                            <option defaultValue="selected">Change theme</option>
+                            {
+                                themes.map((module, key) => <option value={key} key={module}>{module}</option>)
                             }
                         </select>
                     </div>
@@ -221,7 +277,7 @@ function Settings() {
                     {timeError.length > 0 &&
                         <span className='alert'><span>&#9888; </span>{timeError}</span>}
                     <label>CHOOSE YOUR ENABLED FEATURES:</label>
-                    {errors && <h5 className="alert"><span>&#9888; </span>Too many features. Max: {numfeatures}</h5>}
+                    {errors && <h5 className="alert"><span>&#9888; </span>Too many features. Max: {numfeatures} for {customerData.data.SUBSCRIPTION} subscription</h5>}
 
                     <div className="settings__rightbarTextInputFieldsCheck">
                         <FormControl component="fieldset" className={classes.formControl}>
@@ -259,7 +315,7 @@ function Settings() {
                         </FormControl>
                     </div>
 
-                    <button disabled={errors || allowed || timeError}><span>EDIT</span></button>
+                    <button onClick={handleUpdateClick} disabled={errors || allowed || timeError}><span>EDIT</span></button>
 
                 </div>
 
