@@ -206,7 +206,7 @@ function Settings() {
     };
 
 
-    //Get and set the data related to features checkboxes
+    //Get and set the data related to features checkboxes and max cant of features when change customerData
     useEffect(() => {
         var features = {
             "free": 1,
@@ -230,7 +230,7 @@ function Settings() {
         }
     }, [customerData])
 
-    //If the data is loaded
+    //If the data is loaded render the full component
     if (customerData && timezones) {
         return (
             <div className='settings' data-testid="settings">
@@ -332,6 +332,7 @@ function Settings() {
             </div>
         )
     } else {
+        //If data failed or is loading
         return (
             <div className="check" data-testid="loading" >
                 {error ? <div> {error}</div> :<PuffLoader color={'#16C79A'} loading={true} css={override} size={150} />}
