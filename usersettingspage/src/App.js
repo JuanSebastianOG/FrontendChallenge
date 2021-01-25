@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from './components/Home';
+import NotfFound from "./components/NotfFound";
 import Settings from "./components/Settings";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
                 <Route path="/customerdata/:idUser" >
                     <Settings />
                 </Route>
+                <Route component={NotfFound} />
             </Switch>
         </Router>
     );
