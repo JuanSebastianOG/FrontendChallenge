@@ -2,7 +2,7 @@ import React from 'react'
 import UserCard from './UserCard'
 import '../css/Home.css'
 import useFetch from '../useFetch'
-import PuffLoader from "react-spinners/PuffLoader";
+import {PuffLoader} from "react-spinners";
 import { css } from "@emotion/core";
 
 const override = css`

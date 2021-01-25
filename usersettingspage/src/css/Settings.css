@@ -68,6 +68,8 @@
     height: 150px;
     width: 150px;
     margin: 0.5rem;
+    border: 4px solid #F8F1F1;
+
     border-radius: 50%;
 }
 
@@ -155,10 +157,6 @@
     margin: 0.5rem;
 }
 
-.settings__rightbarTextInputFields>datalist {
-    color: blue;
-    background-color: chartreuse;
-}
 .settings__rightbarTextInputFields>input {
     padding: 0.5rem;
     outline: none;
@@ -273,6 +271,10 @@
 }
 
 @media only screen and (max-width: 800px) {
+    .settings__rightbarTextarea {
+        padding-left: 0;
+        padding-right: 0;
+    }
     .settings {
         flex-direction: column;
     }
@@ -283,9 +285,7 @@
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
     }
-    .container {
-        margin-bottom: unset;
-    }
+  
     .settings__leftbarMiddle {
         flex: unset;
         display: unset;
@@ -312,13 +312,37 @@
         margin-top: 2rem;
         margin-bottom: 2rem;
     }
+    .settings__rightbarTextInputFields {
+        grid-template-columns: unset;
+    }
 }
 
 
 @media only screen and (max-width: 420px) {
-    .settings__rightbarTextInputFields {
-        grid-template-columns: unset;
+    .settings__rightbarTextInputFields>label>span {
+        font-size: smaller;
     }
+    .settings__rightbarTextInputFields>input {
+        padding: 0.5rem;
+        outline: none;
+        border: none;
+        background-color: #F8F1F1;
+        border-bottom: #19456b solid 3px;
+        color: #707070;
+        font-size: x-small;
+    }
+
+    
+    .settings__rightbarTextInputFields>select {
+        outline: none;
+        border: none;
+        background-color: #F8F1F1;
+        border-bottom: #19456b solid 3px;
+        font-size: x-small;
+        color: #707070;
+        padding: 0.3rem;
+    }
+    
     .settings__rightbarTextInputFields {
         margin-top: 2rem;
     }
