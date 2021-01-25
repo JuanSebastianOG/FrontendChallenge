@@ -2,6 +2,7 @@ import React from 'react'
 import '../css/UserCard.css'
 import { Link } from 'react-router-dom';
 
+//Display a user card based on the info sended as props
 function UserCard({ name, email, imgsrc, idcustomer }) {
     return (
         <div className='usercard' data-testid="usercard" >

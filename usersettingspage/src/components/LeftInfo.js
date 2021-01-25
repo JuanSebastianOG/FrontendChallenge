@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment';
 import '../css/LeftInfo.css'
 
+//Get the user static info as props and show it correctly on Settings.js component
 function LeftInfo({ subscription, creationdate, lastpayment }) {
     return (
         <div className="leftinfo">

@@ -3,6 +3,7 @@ import Home from './components/Home';
 import NotfFound from "./components/NotfFound";
 import Settings from "./components/Settings";
 
+//All app routes
 function App() {
     return (
         <Router>

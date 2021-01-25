@@ -10,7 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import PuffLoader from "react-spinners/PuffLoader";
 import { css } from "@emotion/core";
-
+//Spinner for loading spinner
 const override = css`
   display: flex;
   margin: 0 auto;
@@ -94,7 +94,7 @@ function Settings() {
         setTime(event.target.value)
     };
 
-    //Max number of features validation
+    //Max number of features validation 
     const errors = [ceinge, inbata, encose, encodi, endase, ened].filter((v) => v).length > numfeatures
 
     //Changes on checkboxes
@@ -157,8 +157,8 @@ function Settings() {
         de: "German"
     };
 
+    //When user click on edit - cresate a put request on the specific user
     const handleUpdateClick = (event) => {
-        console.log(email, theme, time, language, ceinge, endase, inbata, ened, encodi, encose)
         var banner = document.getElementById('textarea').innerHTML;
         const requestOptions = {
             method: 'PUT',
@@ -187,7 +187,6 @@ function Settings() {
                 }
             )
         };
-        console.log(requestOptions.body)
         fetch(link + '/', requestOptions)
             .then(async response => {
                 const data = await response.json();
