@@ -261,7 +261,11 @@
     opacity: 1;
     right: 0;
 }
-
+.check {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
 @media only screen and (max-width: 1120px) {
     .settings__leftbar {
         height: unset;
@@ -309,6 +313,7 @@
         margin-bottom: 2rem;
     }
 }
+
 
 @media only screen and (max-width: 420px) {
     .settings__rightbarTextInputFields {

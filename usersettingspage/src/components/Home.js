@@ -2,21 +2,28 @@ import React from 'react'
 import UserCard from './UserCard'
 import '../css/Home.css'
 import useFetch from '../useFetch'
+import PuffLoader from "react-spinners/PuffLoader";
+import { css } from "@emotion/core";
 
+const override = css`
+  display: flex;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 function Home() {
     const { data: customers, error } = useFetch('/api/v1/customerdata/')
 
-
+    
     return (
         <div className='home' data-testid="home-page">
             <h1>Our Customers</h1>
             {error && <div> {error}</div>}
             <div className="home__userscontainer">
-                {customers && 
+                {customers?
                     customers.results.map((customer, index) => (
                         <UserCard key={customer.id} name={customer.data.theme_name} email={customer.data.user_email} imgsrc={customer.data.user_profile_image} idcustomer={customer.id} />
-                    ))
+                    )):<PuffLoader color={'#16C79A'} loading={true} css={override} size={150} />
                 }
             </div>
         </div>

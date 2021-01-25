@@ -8,7 +8,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
+import PuffLoader from "react-spinners/PuffLoader";
+import { css } from "@emotion/core";
 
+const override = css`
+  display: flex;
+  margin: 0 auto;
+  border-color: red;
+`;
 //Styles for formControl of Material UI
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -112,7 +119,6 @@ function Settings() {
                 setened(event.target.checked)
                 break;
             default:
-
                 break;
         }
     };
@@ -122,7 +128,7 @@ function Settings() {
     const { data: customerData, error } = useFetch(link)
 
     //Fetch time zones for the search select 
-    const { data: timezones } = useFetch('http://worldtimeapi.org/api/timezone')
+    const { data: timezones } = useFetch('http://worldtimeapi.org/api/timezonee')
 
 
     //Themes for select if customer wants to edit
@@ -327,8 +333,8 @@ function Settings() {
         )
     } else {
         return (
-            <div className="check">
-                {error ? <div> {error}</div> : <div>Loading..</div>}
+            <div className="check" data-testid="loading" >
+                {error ? <div> {error}</div> :<PuffLoader color={'#16C79A'} loading={true} css={override} size={150} />}
             </div>
 
         )
