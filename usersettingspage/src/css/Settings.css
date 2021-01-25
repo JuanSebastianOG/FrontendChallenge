@@ -1,6 +1,54 @@
 .settings {
     display: flex;
 }
+.settings__backbtn{
+    position: fixed;
+    top: 10%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 4%;
+    z-index: 999;
+    background-color: #16C79A;
+    padding: 0.5rem;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: 800;
+    border-radius: 20px;
+    cursor: pointer;
+    
+    box-shadow: 1px 1px #707070;
+}
+.settings__rightbar>a>button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.settings__backbtn span:after {
+    content: '\00AB';
+    position: absolute;
+    opacity: 0;
+    top: 6px;
+    right: -20px;
+    transition: 0.5s;
+    margin-right: 5px;
+}
+
+.settings__backbtn:hover span {
+    padding-right: 15px;
+    
+}
+
+.settings__backbtn:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+
+
 .MuiTypography-body1 {
     font-family: 'Montserrat',"Roboto", "Helvetica", "Arial", sans-serif !important;
     margin: 0.5rem!important;
@@ -52,33 +100,6 @@
     width: 80px;
     position: relative;
     bottom: 40px;
-}
-
-.container {
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    margin-bottom: 5rem;
-}
-
-.grid__iconDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.grid__icon {
-    margin: 1rem;
-    height: 30px;
-    align-self: center;
-}
-
-.grid__text {
-    color: white;
-    margin: 1rem;
-    font-size: smaller;
-    text-align: center;
 }
 
 .settings__rightbar {
@@ -176,6 +197,7 @@
 
 .settings__rightbarTextInputFieldsCheck {
     display: flex;
+    width: 80%;
     justify-content: space-around;
     flex-wrap: wrap;
 }
@@ -239,7 +261,11 @@
     opacity: 1;
     right: 0;
 }
-
+.check {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
 @media only screen and (max-width: 1120px) {
     .settings__leftbar {
         height: unset;
@@ -287,6 +313,7 @@
         margin-bottom: 2rem;
     }
 }
+
 
 @media only screen and (max-width: 420px) {
     .settings__rightbarTextInputFields {

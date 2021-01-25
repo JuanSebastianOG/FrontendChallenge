@@ -1,0 +1,36 @@
+
+.leftinfo {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin-bottom:3.5rem;
+}
+
+.leftinfo__iconDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leftinfo__icon {
+    margin-top: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    height: 30px;
+    align-self: center;
+}
+
+.leftinfo__text {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: smaller;
+    text-align: center;
+    white-space:pre;
+}
+@media only screen and (max-width: 800px) {
+    .leftinfo {
+        margin-bottom: unset;
+    }
+}
