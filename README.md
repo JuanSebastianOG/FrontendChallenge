@@ -13,8 +13,12 @@ To activate virtual enviorment
 To run the server 
 
 # 4. On another terminal - cd .\usersettingspage
-Go into react app Settings app
-# 5. npm start
+Go into react Settings app
+
+# 5. npm install
+For adding packages needed
+
+# 6. npm start
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in the browser
 
